@@ -5,16 +5,34 @@ const mongoose = require('mongoose')
 const csvtojson = require('csvtojson')
 const multer = require('multer')
 const fs = require('fs')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session') //do an npm install express-session
+const methodOverride = require('method-override') //do anconst  npm install method-override. This here is requiring this library
 
 const port = process.env.PORT || 5001
 const app = express()
+const initializePassport = require('./passport-config')
+//finding user based on email
 
 const staticDir = process.env.DEV ? './client/public' : './client/build'
 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true })) //SHOULDN'T THIS BE FALSE??
 app.use(express.json())
+app.use(flash()) //using flash
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+) //first param is secret key stored .env,second var in session means don't resave if nothing changed in session, don't save empty value (save uninitialized false)
+
+app.use(passport.initialize())
+app.use(passport.session())
+//Benefit of session() with passport: req.user is always going to be sent to the user that is authenticated at that moment
+app.use(methodOverride('_method'))
 
 //------------------------------MONGOOSE SETUP------------------------------
 //creating mongoose Schema for stories
@@ -35,6 +53,11 @@ const StorySchema = new mongoose.Schema({
   WhatIsYourExperienceWithMedicalDebtCollectors: String
 })
 
+const UserSchema = new mongoose.Schema({
+  UserName: String,
+  Email: String,
+  Password: String
+})
 //creating the initial connection to the database using url for mongoAtlas and .env secured password
 // mongoose.connect("mongodb://localhost:27017/VT-Legal", {
 //   useNewUrlParser: true,
@@ -48,20 +71,28 @@ mongoose.connect(
     useUnifiedTopology: true
   }
 )
-//
 
 //initializing database using connection and storing in variable database
 const database = mongoose.connection
 
 //setting up Stories model using the StorySchema and the collection
 const Stories = mongoose.model('all-stories', StorySchema)
-const AdminCred = mongoose.model('admins', {
-  username: { type: String, required: true },
-  password: { type: String, required: true }
-})
+const Users = mongoose.model('admins', UserSchema)
 
 //binds error message to the connection variable to print if an error occurs with database connection
 database.on('error', console.error.bind(console, 'connection error'))
+
+//Connect users to database
+const users = initializePassport(
+  passport,
+
+  async email => {
+    const user = await Users.findOne({ Email: email }).exec()
+
+    return user
+  },
+  id => users.find(user => user.id === id)
+)
 
 //-------------------------------MULTER-----------------------------------------
 //setting up multer to point at the destination "uploads/"
@@ -206,57 +237,78 @@ app.post('/delete/:id', async (req, res) => {
 })
 
 //------------------------------ADMIN-AUTHENTICATION---------------
-app.post('/attemptLogin', async (req, res) => {
-  const user = await AdminCred.findOne({ username: req.body.username })
-  console.log(user)
-  if (!user) {
-    console.log('Error with User in Database')
-    return { status: 'error', error: 'Invalid Login' }
-  }
-
-  const isPasswordValid = await bcrypt.compare(req.body.password, user.password)
-  if (isPasswordValid) {
-    console.log('This password was valid')
-    const token = jwt.sign(
-      {
-        userID: user._id
-      },
-      process.env.SECRET,
-      { expiresIn: '24h' }
-    )
-    console.log(token)
-    // res.cookie("user", token);
-    return res.json({ status: 'ok', userID: user._id, token: token })
-  } else {
-    console.log('This password was invalid')
-    return res.json({ status: 'error', user: false })
-  }
+app.get('/login', checkAuthenticated, (req, res) => {
+  res.render('AdminPortalLogin.js')
 })
 
-app.post('/register', async (req, res) => {
-  console.log(req.body)
-  let hashedPassword = await bcrypt.hash(
-    req.body.password,
-    parseInt(process.env.SALT)
-  )
+app.get('/admin-portal', checkAuthenticated, (req, res) => {
+  console.log("I'm here!")
+  res.render('Admin.js')
+})
 
-  const newAdmin = new AdminCred({
-    username: req.body.username,
-    password: hashedPassword
+//if not authenticated, kicks them back to registration page
+app.get('/register', checkNotAuthenticated, (req, res) => {
+  res.render('AdminRegister.js')
+})
+
+//using passport authentication middleware... local means the *local strategy*, first param where we go if success, second if failure, flash failure means
+app.post(
+  '/login',
+  checkNotAuthenticated,
+  passport.authenticate('local', {
+    successRedirect: '/admin-portal',
+    failureRedirect: '/login',
+    failureFlash: true //shows flash message to user from the passport config files messages
   })
+)
 
-  //saving the new story
-  await newAdmin.save()
+app.post('/register', checkNotAuthenticated, async (req, res) => {
+  try {
+    console.log(req.body)
 
-  res.redirect('back')
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+
+    await Users.create({
+      UserName: req.body.name,
+      Email: req.body.email,
+      Password: hashedPassword
+    })
+    res.redirect('login') //if registration was successful, go to login
+  } catch {
+    res.redirect('/register')
+  }
 })
+
+//to log out (an express method)
+app.delete('/logout', (req, res) => {
+  req.logOut()
+  res.redirect('/login')
+})
+
+//protecting our routes with middleware function that checks if authenticated
+function checkAuthenticated (req, res, next) {
+  if (req.isAuthenticated()) {
+    //if true
+    return next()
+  }
+  res.redirect('/login')
+}
+
+//so user can't type "/login" and go back to blank login if they are already logged in
+function checkNotAuthenticated (req, res, next) {
+  if (req.isAuthenticated()) {
+    //if true send them back to homepage
+    return res.redirect('/')
+  }
+  next() //if NOT authenticated, send to the route they typed in (/login)
+}
+
+app.use(express.static('build')) //looks @ build directory as static site to serve up
 
 //routing * to handle any non-set routes to a 404 page
 // app.get("*", (req, res) => {
 //   res.send(`<h3>404: Whoops, something went wrong...</h3>`);
 // });
-
-app.use(express.static('build')) //looks @ build directory as static site to serve up
 
 //listening on port 5000 and console logging a message to ensure it is listening
 app.listen(port, () =>

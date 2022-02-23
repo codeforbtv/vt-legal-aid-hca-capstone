@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Map from './components/Map'
 import Home from './components/Home'
 import About from './components/About'
-
-// // import Admin from "./components/Admin";
-// import AdminPortalLogin from "./components/AdminPortalLogin";
+import AdminPortalLogin from './components/AdminPortalLogin'
+import AdminRegister from './components/AdminRegister'
+import Admin from './components/Admin'
 
 //setting up routes using react router
 function App (props) {
@@ -15,7 +15,9 @@ function App (props) {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
-          {/* <Route path="/admin-portal" element={<AdminPortalLogin />} /> */}
+          <Route path='/login' element={<AdminPortalLogin />} />
+          <Route path='/admin-portal' element={<Admin />} />
+          <Route path='/register' element={<AdminRegister />} />
           <Route path='/map' element={<Map />} />
         </Routes>
       </BrowserRouter>
