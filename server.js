@@ -237,29 +237,17 @@ app.post('/delete/:id', async (req, res) => {
 })
 
 //------------------------------ADMIN-AUTHENTICATION---------------
-app.get('/login', checkAuthenticated, (req, res) => {
-  res.render('AdminPortalLogin.js')
-})
-
-app.get('/admin-portal', checkAuthenticated, (req, res) => {
-  console.log("I'm here!")
-  res.render('Admin.js')
-})
-
-//if not authenticated, kicks them back to registration page
-app.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('AdminRegister.js')
-})
-
 //using passport authentication middleware... local means the *local strategy*, first param where we go if success, second if failure, flash failure means
 app.post(
   '/login',
   checkNotAuthenticated,
-  passport.authenticate('local', {
-    successRedirect: '/admin-portal',
-    failureRedirect: '/login',
-    failureFlash: true //shows flash message to user from the passport config files messages
-  })
+  async (req, res, next) => {
+    console.log(req);
+    passport.authenticate('local', {}, (err, user, info) => {
+      console.log(user);
+      res.json(user);
+    });
+  }
 )
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
