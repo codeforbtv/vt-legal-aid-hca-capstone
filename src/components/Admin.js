@@ -39,9 +39,18 @@ export default function Admin (props) {
   const [rowSelection, setRowSelection] = useState([])
   const [mongoID, setMongoID] = useState('')
   const [respID, setRespID] = useState('')
-  const [county, setCounty] = useState('')
-  const [insured, setInsured] = useState('')
-  const [age, setAge] = useState('')
+  const [
+    // county,
+    setCounty
+  ] = useState('')
+  const [
+    // insured,
+    setInsured
+  ] = useState('')
+  const [
+    // age,
+    setAge
+  ] = useState('')
   const [medicalDebt, setMedicalDebt] = useState('')
   const [accessCare, setAccessCare] = useState('')
   const [costCare, setCostCare] = useState('')

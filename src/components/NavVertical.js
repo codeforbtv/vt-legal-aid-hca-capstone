@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
 import Stack from "@mui/material/Stack";
 import ListItem from "@mui/material/ListItem";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,27 +13,6 @@ import Select from "@mui/material/Select";
 import { Link } from "react-router-dom";
 
 export default function NavVertical(props) {
-  const [state, setState] = useState({
-    mobileView: false,
-  });
-
-  // const { mobileView } = state;
-
-  useEffect(() => {
-    const setResponsiveness = () => {
-      return window.innerWidth < 900
-        ? setState((prevState) => ({ ...prevState, mobileView: true }))
-        : setState((prevState) => ({ ...prevState, mobileView: false }));
-    };
-
-    setResponsiveness();
-    window.addEventListener("resize", () => setResponsiveness());
-
-    return () => {
-      window.removeEventListener("resize", () => setResponsiveness());
-    };
-  }, []);
-
   //evt handler for when a new filter is selected from the form in this component
   const handleChange = (event) => {
     if(event.target.value !== "Clear") {

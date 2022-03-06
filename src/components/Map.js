@@ -1,10 +1,7 @@
 //imports
-import Typography from "@material-ui/core/Typography";
-import { NoEncryption } from "@material-ui/icons";
 import {
   MapContainer,
   TileLayer,
-  Polygon,
   GeoJSON,
   useMap,
   ScaleControl,

@@ -25,16 +25,24 @@ const GreenTextTypography = withStyles({
 
 export default function About () {
   //creating use state variables
-  const [center, setCenter] = useState([43.88, -72.7317])
-  const [zoom, setZoom] = useState(8)
-  const [featuredDisplay, setFeaturedDisplay] = useState(true)
-  const [countyStoryDisplay, setCountyStoryDisplay] = useState(false)
-  const [selectedCounty, setSelectedCounty] = useState('')
-  const [shuffledIndex, setShuffledIndex] = useState(0)
-  const [impact, setImpact] = useState('')
+  const [
+    // featuredDisplay,
+    setFeaturedDisplay
+  ] = useState(true)
+  const [
+    // countyStoryDisplay,
+    setCountyStoryDisplay
+  ] = useState(false)
+  const [
+    // selectedCounty,
+    setSelectedCounty
+  ] = useState('')
   const [navCountySelect, setNavCountySelect] = useState('')
   const [mobileView, setMobileView] = useState(false)
-  const [isSelected, setIsSelected] = useState(false)
+  const [
+    // isSelected,
+    setIsSelected
+  ] = useState(false)
 
   //useEffect to set the mobile view for navigation based on the window width
   useEffect(() => {
@@ -127,6 +135,7 @@ export default function About () {
             <a
               href='https://docs.google.com/forms/d/e/1FAIpQLScRvw8T2MMNnG9up4qYqJ-oKS2WkUUPnOmkIip8QQP-RVxBeQ/viewform'
               target='_blank'
+              rel="noreferrer"
             >
               Please share your story here.
             </a>
