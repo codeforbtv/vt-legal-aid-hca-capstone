@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import LegalAidLogo1 from '../LegalAidLogo1.png'
+import LegalAidLogo1 from '../LegalAidLogo1.jpg'
 
 export default function NavAbout (props) {
 
@@ -16,7 +16,14 @@ export default function NavAbout (props) {
         className={'Nav-bar'}
       >
         <Toolbar>
-          <img src={LegalAidLogo1} alt='logo' width='100' />
+          <a href='https://www.vtlegalaid.org/'>
+            {' '}
+            <img
+              src={LegalAidLogo1}
+              alt='logo'
+              width='150'
+            />
+          </a>
 
           <div id='nav-typography'>
             <Typography variant='h4'>Health Care Debt in Vermont</Typography>

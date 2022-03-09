@@ -99,6 +99,15 @@ const users = initializePassport(
 const upload = multer({ dest: 'uploads/' })
 
 //-------------------------------ROUTES----------------------------------------
+
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'src/index.html'), function (err) {
+//     if (err) {
+//       res.status(500).send(err)
+//     }
+//   })
+// })
+
 //---------CREATE-------------
 app.post('/createnew', async (req, res) => {
   //creation of a new story from admin portal
@@ -301,10 +310,13 @@ function checkNotAuthenticated (req, res, next) {
 
 app.use(express.static('build')) //looks @ build directory as static site to serve up
 
-//routing * to handle any non-set routes to a 404 page
-// app.get("*", (req, res) => {
-//   res.send(`<h3>404: Whoops, something went wrong...</h3>`);
-// });
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build/index.html'), function (err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 //listening on port 5000 and console logging a message to ensure it is listening
 app.listen(port, () =>
