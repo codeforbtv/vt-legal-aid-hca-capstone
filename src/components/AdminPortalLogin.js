@@ -1,25 +1,48 @@
+import { useContext } from 'react';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from '../contexts/auth';
+
 export default function AdminPortalLogin ({ setToken }) {
-  const handleLogin = async (ev) => {
+  let navigate = useNavigate();
+  let location = useLocation();
+  let auth = useContext(AuthContext);
+
+  let from = location.state?.from?.pathname || "/admin-portal";
+
+  async function handleLogin(ev) {
     ev.preventDefault();
-    const email = ev.target.querySelector('[name="email"]').value;
-    const password = ev.target.querySelector('[name="password"]').value;
-    const token = await fetch({
-      method: 'post',
-      url: '/login',
-      data: {
-        email,
-        password,
-      }
-    });
-    console.log(token);
-    setToken(token);
-  };
+
+    const formData = new FormData(ev.target);
+    console.log(formData)
+    try {
+      const response = await fetch('/api/login', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData,
+      });
+
+      // auth.signin(user, () => {
+      //   // Send them back to the page they tried to visit when they were
+      //   // redirected to the login page. Use { replace: true } so we don't create
+      //   // another entry in the history stack for the login page.  This means that
+      //   // when they get to the protected page and click the back button, they
+      //   // won't end up back on the login page, which is also really nice for the
+      //   // user experience.
+      //   navigate(from, { replace: true });
+      // });
+    }
+    catch (ex) {
+      console.log(ex);
+    }
+  }
 
   return (
     <>
       <h1>Log in Here!</h1>
       {/* if (messages.error){messages.error} */}
-      <form onSubmit={handleLogin} >
+      <form onSubmit={handleLogin}>
         <div>
           <label htmlFor='email'>Email:</label>
           <input type='email' id='email' name='email' required />
@@ -31,7 +54,7 @@ export default function AdminPortalLogin ({ setToken }) {
         <button type='submit'>Login</button>
       </form>
       <h5>Don't have an account?</h5>
-      <a href='/register'>Register here</a>
+      <Link to='/register'>Register here</Link>
     </>
   )
 }

@@ -6,14 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import LegalAidLogo1 from "../LegalAidLogo1.png";
 
-function refreshPage() {
-  window.location.reload(false);
-}
-
-
 export default function NavAdmin(props) {
   return (
-    <div class="nav-wrapper">
+    <div className="nav-wrapper">
       <AppBar
         style={{ backgroundColor: "#205A3E" }}
         position="static"
@@ -30,7 +25,7 @@ export default function NavAdmin(props) {
           <Button color="inherit" component={Link} to="/">
               Main Site Home
             </Button>
-            <Button color="inherit" onClick={refreshPage}>
+            <Button color="inherit" component={Link} to="/admin-portal">
               Admin Home
             </Button>
           </div>

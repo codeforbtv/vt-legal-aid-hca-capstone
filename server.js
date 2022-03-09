@@ -239,16 +239,24 @@ app.post('/delete/:id', async (req, res) => {
 //------------------------------ADMIN-AUTHENTICATION---------------
 //using passport authentication middleware... local means the *local strategy*, first param where we go if success, second if failure, flash failure means
 app.post(
-  '/login',
-  checkNotAuthenticated,
-  async (req, res, next) => {
-    console.log(req);
-    passport.authenticate('local', {}, (err, user, info) => {
-      console.log(user);
-      res.json(user);
-    });
+  '/api/login',
+  // passport.authenticate('local', {
+  //   failureMessage: true,
+  // }),
+  async (req, res) => {
+    console.log(req.body)
+    res.json(req.user)
   }
 )
+
+app.get(
+  '/api/currentuser',
+  async (req, res) => {
+    res.json({
+      email: 'hello@world.com'
+    })
+  }
+);
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {

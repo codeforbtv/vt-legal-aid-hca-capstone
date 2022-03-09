@@ -85,12 +85,12 @@ export default function About () {
       )}
 
       <div className='subpage-wrapper'>
-        <div class='left-article'>
+        <div className='left-article'>
           <MaroonTextTypography variant='h5'>
             <strong> About This Web Site </strong>
           </MaroonTextTypography>
-          <div class='content'>
-            <GreenTextTypography variant='h7'>
+          <div className='content'>
+            <GreenTextTypography variant='h6'>
               <em>
                 {' '}
                 <strong>
@@ -99,14 +99,14 @@ export default function About () {
               </em>
             </GreenTextTypography>
           </div>
-          <div class='content'>
+          <div className='content'>
             The Office of the Health Care Advocate (HCA) is collecting
             Vermonters’ experiences with medical debt. We heard from hundreds of
             Vermonters from all parts of the state who have or continue to
             suffer from the impact of medical debt.
           </div>
-          <div class='content'>
-            <GreenTextTypography variant='h7'>
+          <div className='content'>
+            <GreenTextTypography variant='h6'>
               <strong>
                 <em>
                   The Health Care Debt In Vermont project has three goals:
@@ -114,7 +114,7 @@ export default function About () {
               </strong>
             </GreenTextTypography>
           </div>
-          <div class='content'>
+          <div className='content'>
             <ol>
               <li>
                 Inform policy makers and the public about the issue of medical
@@ -129,7 +129,7 @@ export default function About () {
               <li>Let the voices of Vermonters be heard.</li>
             </ol>
           </div>
-          <div class='content'>
+          <div className='content'>
             The project is ongoing and we would love to hear about your
             experiences.{' '}
             <a
@@ -142,7 +142,7 @@ export default function About () {
           </div>
         </div>
 
-        <div class='right-article'>
+        <div className='right-article'>
           <img src={Debt2} alt='legal debt' />
         </div>
       </div>

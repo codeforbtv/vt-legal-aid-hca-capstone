@@ -26,12 +26,8 @@ export default function Nav(props) {
     }
   };
 
-  function refreshPage() {
-    window.location.reload(false);
-  }
-
   return (
-    <div class="nav-wrapper">
+    <div className="nav-wrapper">
       <AppBar
         style={{ backgroundColor: "#205A3E" }}
         position="static"
@@ -45,7 +41,7 @@ export default function Nav(props) {
             <Typography variant="h6">Real People - Real Stories</Typography>
           </div>
           <div id="nav-buttons">
-            <Button color="inherit" onClick={refreshPage}>
+            <Button color="inherit" component={Link} to="/">
               Home
             </Button>
 

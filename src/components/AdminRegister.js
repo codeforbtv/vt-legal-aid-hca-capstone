@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Register () {
   return (
     <>
@@ -5,22 +7,22 @@ export default function Register () {
 
       <form action='/register' method='POST'>
         <div>
-          <label for='name'>Name:</label>
+          <label htmlFor='name'>Name:</label>
           <input type='text' id='name' name='name' required />
         </div>
         <div>
-          <label for='email'>Email:</label>
+          <label htmlFor='email'>Email:</label>
           <input type='email' id='email' name='email' required />
         </div>
         <div>
-          <label for='password'>Password:</label>
+          <label htmlFor='password'>Password:</label>
           <input type='password' id='password' name='password' required />
         </div>
         <button type='submit'>Register</button>
       </form>
 
       <h2>Already have an account?</h2>
-      <a href='/login'>Login</a>
+      <Link to='/login'>Login</Link>
     </>
   )
 }

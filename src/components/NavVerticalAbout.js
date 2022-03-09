@@ -27,10 +27,6 @@ export default function NavVertical (props) {
     }
   }
 
-  // function refreshPage () {
-  //   window.location.reload(false)
-  // }
-
   return (
     <div className='nav-wrapper'>
       <AppBar
@@ -73,7 +69,7 @@ export default function NavVertical (props) {
               <Stack>
                 <ListItem className='V-Buttons'>
                   {' '}
-                  <Button color='inherit' component={Link} to='/About'>
+                  <Button color='inherit' component={Link} to='/about'>
                     About
                   </Button>
                 </ListItem>
