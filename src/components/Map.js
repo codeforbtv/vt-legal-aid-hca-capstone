@@ -150,7 +150,7 @@ function Map (props) {
       id={'map-container'}
       center={props.center}
       zoom={props.zoom}
-      zoomControl={false}
+      zoomControl={true}
       scrollWheelZoom={true}
       doubleClickZoom={false}
       touchZoom={false}
@@ -174,7 +174,7 @@ function Map (props) {
       {/* GeoJSON created using the countyBoundary data imported from the VT county boundary data. GeoJSON has a onEachFeature set to call the featureSelection function that will allow for interaction with each county in the layer */}
       <GeoJSON data={countyBoundary} onEachFeature={featureSelection} />
       <ScaleControl position='topright' />
-      <ZoomControl position='topleft' />
+      {/* <ZoomControl position='topleft' /> */}
     </MapContainer>
   )
 }

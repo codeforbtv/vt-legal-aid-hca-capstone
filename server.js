@@ -67,16 +67,6 @@ database.on('error', console.error.bind(console, 'connection error'))
 //setting up multer to point at the destination "uploads/"
 const upload = multer({ dest: 'uploads/' })
 
-//-------------------------------ROUTES----------------------------------------
-
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'src/index.html'), function (err) {
-//     if (err) {
-//       res.status(500).send(err)
-//     }
-//   })
-// })
-
 //---------CREATE-------------
 app.post('/createnew', async (req, res) => {
   //creation of a new story from admin portal
@@ -266,6 +256,15 @@ app.post('/register', async (req, res) => {
 // });
 
 app.use(express.static('build')) //looks @ build directory as static site to serve up
+
+//catch-all for other pages, ie- when you refresh About.js
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build/index.html'), function (err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 //listening on port 5000 and console logging a message to ensure it is listening
 app.listen(port, () =>
