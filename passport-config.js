@@ -31,9 +31,19 @@ function initialize (passport, getUserByEmail, getUserById) {
 
   /*Serializing a user determines which data of the user object should be stored in the session, usually the user id . The serializeUser() function sets 
   an id as the cookie in the user's browser, and the deserializeUser() function uses the id to look up the user in the database and retrieve the user object with data.*/
-  passport.serializeUser((user, done) => done(null, user.id))
-  passport.deserializeUser((id, done) => {
-    return done(null, getUserById(id))
+  passport.serializeUser((user, done) => {
+    done(null, user.Email)
+  })
+  passport.deserializeUser(async (email, done) => {
+    try {
+      const user = await getUserByEmail(email) //returns user by email or null if no email
+      if (!user) {
+        return done(new Error('user not found'));
+      }
+      done(null, user);
+    } catch (e) {
+      done(e);
+    }
   }) //serialize user as single id so must then de-serialize
 }
 

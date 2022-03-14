@@ -263,9 +263,15 @@ app.post(
 app.get(
   '/api/currentuser',
   async (req, res) => {
-    res.json({
-      email: 'hello@world.com'
-    })
+    if (req.user) {
+      res.json({
+        email: req.user.Email,
+        username: req.user.UserName,
+      });
+    }
+    else {
+      res.json(null);
+    }
   }
 );
 
