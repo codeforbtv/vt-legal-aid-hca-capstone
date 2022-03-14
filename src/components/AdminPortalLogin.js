@@ -13,25 +13,26 @@ export default function AdminPortalLogin ({ setToken }) {
     ev.preventDefault();
 
     const formData = new FormData(ev.target);
-    console.log(formData)
     try {
       const response = await fetch('/api/login', {
         method: 'post',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: formData,
+        body: new URLSearchParams(formData).toString(),
       });
 
-      // auth.signin(user, () => {
-      //   // Send them back to the page they tried to visit when they were
-      //   // redirected to the login page. Use { replace: true } so we don't create
-      //   // another entry in the history stack for the login page.  This means that
-      //   // when they get to the protected page and click the back button, they
-      //   // won't end up back on the login page, which is also really nice for the
-      //   // user experience.
-      //   navigate(from, { replace: true });
-      // });
+      const user = await response.json();
+
+      auth.signin(user, () => {
+        // Send them back to the page they tried to visit when they were
+        // redirected to the login page. Use { replace: true } so we don't create
+        // another entry in the history stack for the login page.  This means that
+        // when they get to the protected page and click the back button, they
+        // won't end up back on the login page, which is also really nice for the
+        // user experience.
+        navigate(from, { replace: true });
+      });
     }
     catch (ex) {
       console.log(ex);
@@ -42,7 +43,7 @@ export default function AdminPortalLogin ({ setToken }) {
     <>
       <h1>Log in Here!</h1>
       {/* if (messages.error){messages.error} */}
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} method="post" action="/api/login">
         <div>
           <label htmlFor='email'>Email:</label>
           <input type='email' id='email' name='email' required />

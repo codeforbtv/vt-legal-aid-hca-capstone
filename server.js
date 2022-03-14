@@ -91,7 +91,7 @@ const users = initializePassport(
 
     return user
   },
-  id => users.find(user => user.id === id)
+  id => users?.find(user => user.id === id)
 )
 
 //-------------------------------MULTER-----------------------------------------
@@ -249,12 +249,14 @@ app.post('/delete/:id', async (req, res) => {
 //using passport authentication middleware... local means the *local strategy*, first param where we go if success, second if failure, flash failure means
 app.post(
   '/api/login',
-  // passport.authenticate('local', {
-  //   failureMessage: true,
-  // }),
+  passport.authenticate('local', {
+    failureMessage: true,
+  }),
   async (req, res) => {
-    console.log(req.body)
-    res.json(req.user)
+    res.json({
+      email: req.user.Email,
+      username: req.user.UserName,
+    });
   }
 )
 
