@@ -69,7 +69,7 @@ export default function NavVertical (props) {
             </ListItem>
             <ListItem id='V-Nav-Title'>
               {' '}
-              <Typography variant='h5'>Health Care Debt in Vermont</Typography>
+              <Typography variant='h5'>Medical Debt in Vermont</Typography>
             </ListItem>
             <ListItem id='V-Nav-Subtitle'>
               {' '}

@@ -29,7 +29,7 @@ export default function NavAdmin (props) {
           </a>
 
           <div id='nav-typography'>
-            <Typography variant='h4'>Health Care Debt in Vermont</Typography>
+            <Typography variant='h4'>Medical Debt in Vermont</Typography>
             <Typography variant='h6'>Real People - Real Stories</Typography>
           </div>
           <div id='nav-buttons'>
