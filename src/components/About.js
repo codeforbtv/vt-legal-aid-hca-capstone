@@ -158,18 +158,30 @@ export default function About () {
           </div>
           <div class='content'>
             This site is also made possible by the past and ongoing support of
-            <a href='https://codeforbtv.org/'>Code for BTV</a>.{' '}
-            <a href='https://codeforbtv.org/'>Code for BTV</a> is an official
-            local chapter (known as a Brigade) of the national program
-            <a href='https://brigade.codeforamerica.org/'>
+            <a href='https://codeforbtv.org/' target='_blank'>
+              Code for BTV
+            </a>
+            .{' '}
+            <a href='https://codeforbtv.org/' target='_blank'>
+              Code for BTV
+            </a>{' '}
+            is an official local chapter (known as a Brigade) of the national
+            program
+            <a href='https://brigade.codeforamerica.org/' target='_blank'>
               Code for America
-            </a>. <a href='https://codeforbtv.org/'>Code for BTV</a>
+            </a>
+            .{' '}
+            <a href='https://codeforbtv.org/' target='_blank'>
+              Code for BTV
+            </a>
             facilitates sustainable collaborations on civic software and open
             data projects between coders, designers, and organizations (both
             governmental and non-governmental) in Vermont. Effectively,{' '}
-            <a href='https://codeforbtv.org/'>Code for BTV</a> acts as a pro
-            bono digital agency for our partners, covering all aspects of
-            project design, development, and delivery.
+            <a href='https://codeforbtv.org/' target='_blank'>
+              Code for BTV
+            </a>{' '}
+            acts as a pro bono digital agency for our partners, covering all
+            aspects of project design, development, and delivery.
           </div>
           <div class='content'>
             The HCA is deeply grateful for the support and contributions that
