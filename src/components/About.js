@@ -85,9 +85,7 @@ export default function About () {
             <GreenTextTypography variant='h7'>
               <em>
                 {' '}
-                <strong>
-                  Why the Health Care Debt in Vermont Project Matters{' '}
-                </strong>
+                <strong>Why the Medical Debt Project? </strong>
               </em>
             </GreenTextTypography>
           </div>
@@ -100,9 +98,7 @@ export default function About () {
           <div class='content'>
             <GreenTextTypography variant='h7'>
               <strong>
-                <em>
-                  The Health Care Debt In Vermont project has three goals:
-                </em>
+                <em>The Medical Debt Project's Three Goals</em>
               </strong>
             </GreenTextTypography>
           </div>
@@ -122,6 +118,13 @@ export default function About () {
             </ol>
           </div>
           <div class='content'>
+            <GreenTextTypography variant='h7'>
+              <strong>
+                <em>Participate!</em>
+              </strong>
+            </GreenTextTypography>
+          </div>
+          <div class='content'>
             The project is ongoing and we would love to hear about your
             experiences.{' '}
             <a
@@ -130,6 +133,13 @@ export default function About () {
             >
               Please share your story here.
             </a>
+          </div>
+          <div class='content'>
+            <GreenTextTypography variant='h7'>
+              <strong>
+                <em>Acknowledgements</em>
+              </strong>
+            </GreenTextTypography>
           </div>
           <div class='content'>
             Terri Isidro, Paul Dodson, Matthew Crownover, and Michael Pendleton
