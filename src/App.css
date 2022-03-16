@@ -171,6 +171,7 @@ p {
 
 ol {
   list-style-position: inside;
+  padding-bottom: 5px;
 }
 
 /*------------------------------Admin Portal---------------------------------*/
