@@ -176,14 +176,14 @@ export default function About () {
               Code for BTV
             </a>{' '}
             is an official local chapter (known as a Brigade) of the national
-            program
+            program{' '}
             <a href='https://brigade.codeforamerica.org/' target='_blank'>
               Code for America
             </a>
             .{' '}
             <a href='https://codeforbtv.org/' target='_blank'>
               Code for BTV
-            </a>
+            </a>{' '}
             facilitates sustainable collaborations on civic software and open
             data projects between coders, designers, and organizations (both
             governmental and non-governmental) in Vermont. Effectively,{' '}
