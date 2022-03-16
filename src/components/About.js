@@ -168,7 +168,7 @@ export default function About () {
           </div>
           <div class='content'>
             This site is also made possible by the past and ongoing support of
-            <a href='https://codeforbtv.org/' target='_blank'>
+             <a href='https://codeforbtv.org/' target='_blank'>
               Code for BTV
             </a>
             .{' '}
