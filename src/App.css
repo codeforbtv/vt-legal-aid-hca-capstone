@@ -169,6 +169,14 @@ p {
   margin-right: 1vw;
 }
 
+ol {
+  list-style-position: inside;
+}
+
+li {
+  margin: 10px;
+}
+
 /*------------------------------Admin Portal---------------------------------*/
 .admin-buttons {
   display: flex;
