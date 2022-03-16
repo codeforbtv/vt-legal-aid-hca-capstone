@@ -1,13 +1,35 @@
-import { useContext } from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from '../contexts/auth';
+import useAuth from "../contexts/auth";
 
 export default function AdminPortalLogin ({ setToken }) {
   let navigate = useNavigate();
   let location = useLocation();
-  let auth = useContext(AuthContext);
+  const auth = useAuth();
 
-  let from = location.state?.from?.pathname || "/admin-portal";
+  const from = location.state?.from?.pathname || "/admin-portal";
+
+  // check to see if we are already logged in and if so then log in the user and direct the user to their page
+  useEffect(() => {
+    async function getCurrentUser() {
+      try {
+        // check to see if logged in
+        const response = await fetch('/api/currentuser', {
+          method: 'get',
+        });
+
+        const user = await response.json();
+        if (user) {
+          await auth.login(user);
+          navigate(from, { replace: true });
+        }
+      }
+      catch(ex) {
+        console.log(ex);
+      }
+    }
+    getCurrentUser();
+  }, []);
 
   async function handleLogin(ev) {
     ev.preventDefault();
@@ -24,15 +46,8 @@ export default function AdminPortalLogin ({ setToken }) {
 
       const user = await response.json();
 
-      auth.signin(user, () => {
-        // Send them back to the page they tried to visit when they were
-        // redirected to the login page. Use { replace: true } so we don't create
-        // another entry in the history stack for the login page.  This means that
-        // when they get to the protected page and click the back button, they
-        // won't end up back on the login page, which is also really nice for the
-        // user experience.
-        navigate(from, { replace: true });
-      });
+      await auth.login(user);
+      navigate(from, { replace: true });
     }
     catch (ex) {
       console.log(ex);

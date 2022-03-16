@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Map from './components/Map'
 import Home from './components/Home'
@@ -7,37 +7,31 @@ import About from './components/About'
 import AdminPortalLogin from './components/AdminPortalLogin'
 import AdminRegister from './components/AdminRegister'
 import Admin from './components/Admin'
-import { AuthContext, AuthProvider } from './contexts/auth';
+import { AuthProvider } from './contexts/auth';
+import useAuth from "./contexts/auth";
 
 //setting up routes using react router
 function App (props) {
-  useEffect(() => {
-  }, []);
-
   return (
     <AuthProvider>
-      <div>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/login' element={<AdminPortalLogin />} />
-            <Route path='/admin-portal' element={<RequireAuth><Admin /></RequireAuth>} />
-            <Route path='/register' element={<AdminRegister />} />
-            <Route path='/map' element={<Map />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/login' element={<AdminPortalLogin />} />
+          <Route path='/admin-portal' element={<RequireAuth><Admin /></RequireAuth>} />
+          <Route path='/register' element={<AdminRegister />} />
+          <Route path='/map' element={<Map />} />
+        </Routes>
+      </BrowserRouter>
     </AuthProvider>
-  )
+  );
 }
 
 export default App
 
-
-
 function RequireAuth({ children }) {
-  let auth = useContext(AuthContext);
+  let auth = useAuth();
   let location = useLocation();
 
   if (!auth.user) {

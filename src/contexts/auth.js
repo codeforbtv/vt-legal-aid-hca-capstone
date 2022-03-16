@@ -1,27 +1,33 @@
-import { createContext, useState } from 'react';
-import { fakeAuthProvider } from '../auth';
+import * as React from "react";
 
-const AuthContext = createContext();
+const authContext = React.createContext();
 
-function AuthProvider({ children }) {
-  let [user, setUser] = useState(null);
+function useAuth() {
+  const [user, setUser] = React.useState(null);
 
-  let signin = (newUser, callback) => {
-    return fakeAuthProvider.signin(() => {
-      setUser(newUser);
-      callback();
-    });
+  return {
+    user,
+    login(u) {
+      return new Promise((res) => {
+        setUser(u);
+        res();
+      });
+    },
+    logout() {
+      return new Promise((res) => {
+        setUser(null);
+        res();
+      });
+    },
   };
-
-  let signout = (callback) => {
-    return fakeAuthProvider.signout(() => {
-      setUser(null);
-      callback();
-    });
-  };
-
-  let value = { user, signin, signout };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-export { AuthContext, AuthProvider };
+
+export function AuthProvider({ children }) {
+  const auth = useAuth();
+
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+}
+
+export default function AuthConsumer() {
+  return React.useContext(authContext);
+}
