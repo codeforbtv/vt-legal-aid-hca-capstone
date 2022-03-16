@@ -1,5 +1,4 @@
 import React from 'react'
-import { useEffect, useContext, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Map from './components/Map'
 import Home from './components/Home'

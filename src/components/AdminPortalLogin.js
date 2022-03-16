@@ -29,7 +29,9 @@ export default function AdminPortalLogin ({ setToken }) {
       }
     }
     getCurrentUser();
-  }, []);
+  },
+  // eslint-disable-next-line
+  []);
 
   async function handleLogin(ev) {
     ev.preventDefault();
