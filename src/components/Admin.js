@@ -39,18 +39,9 @@ export default function Admin (props) {
   const [rowSelection, setRowSelection] = useState([])
   const [mongoID, setMongoID] = useState('')
   const [respID, setRespID] = useState('')
-  const [
-    // county,
-    setCounty
-  ] = useState('')
-  const [
-    // insured,
-    setInsured
-  ] = useState('')
-  const [
-    // age,
-    setAge
-  ] = useState('')
+  const [county, setCounty] = useState('')
+  const [insured, setInsured] = useState('')
+  const [age, setAge] = useState('')
   const [medicalDebt, setMedicalDebt] = useState('')
   const [accessCare, setAccessCare] = useState('')
   const [costCare, setCostCare] = useState('')
@@ -189,18 +180,18 @@ export default function Admin (props) {
         ? [
             <form id='create-form' action='/createnew' method='POST'>
               <div>
-                <label for='id'>RespID: </label>
+                <label htmlFor='id'>RespID: </label>
                 <input
                   type='number'
                   name='id'
                   placeholder='RespID'
-                  required='true'
+                  required={true}
                   min='10000000000'
                   max='99999999999'
                 />
               </div>
               <div>
-                <label for='county'>County: </label>
+                <label htmlFor='county'>County: </label>
                 <select name='county'>
                   <option value='Did Not Answer'>Did Not Answer</option>
                   <option value='Addison'>Addison</option>
@@ -220,7 +211,7 @@ export default function Admin (props) {
                 </select>
               </div>
               <div>
-                <label for='insured'>Insured: </label>
+                <label htmlFor='insured'>Insured: </label>
                 <select name='insured'>
                   <option value='Did Not Answer'>Did Not Answer</option>
                   <option value='Yes'>Yes</option>
@@ -228,7 +219,7 @@ export default function Admin (props) {
                 </select>
               </div>
               <div>
-                <label for='age'>Age: </label>
+                <label htmlFor='age'>Age: </label>
                 <select name='age'>
                   <option value='Did Not Answer'>Did Not Answer</option>
                   <option value='18-26'>18-26</option>
@@ -238,7 +229,7 @@ export default function Admin (props) {
                 </select>
               </div>
               <div>
-                <label for='impactLife'>
+                <label htmlFor='impactLife'>
                   How Has Medical Debt Impacted Your Life?{' '}
                 </label>
                 <div>
@@ -246,7 +237,7 @@ export default function Admin (props) {
                 </div>
               </div>
               <div>
-                <label for='impactCare'>
+                <label htmlFor='impactCare'>
                   How Has Medical Debt Impacted Your Access to Care?{' '}
                 </label>
                 <div>
@@ -254,7 +245,7 @@ export default function Admin (props) {
                 </div>
               </div>
               <div>
-                <label for='costCare'>
+                <label htmlFor='costCare'>
                   What Do You Think Of The Cost Of Medical Care?{' '}
                 </label>
                 <div>
@@ -262,7 +253,7 @@ export default function Admin (props) {
                 </div>
               </div>
               <div>
-                <label for='surpriseBill'>
+                <label htmlFor='surpriseBill'>
                   Have You Been Surprised By A Medical Bill?{' '}
                 </label>
                 <div>
@@ -270,7 +261,7 @@ export default function Admin (props) {
                 </div>
               </div>
               <div>
-                <label for='collections'>
+                <label htmlFor='collections'>
                   What Is Your Experience With Medical Debt Collectors?{' '}
                 </label>
                 <div>
@@ -439,7 +430,7 @@ export default function Admin (props) {
               encType='multipart/form-data'
             >
               <div>
-                <label for='csv'>CSV to Upload: </label>
+                <label htmlFor='csv'>CSV to Upload: </label>
                 <input type='file' name='csv' />
                 <br />
                 <input type='submit' />
@@ -510,19 +501,19 @@ export default function Admin (props) {
                 field is needed leave it blank.
               </h4>
               <div>
-                <label for='id'>Current RespID: </label>
+                <label htmlFor='id'>Current RespID: </label>
                 <input
                   value={respID}
                   onChange={evt => setRespID(evt.target.value)}
                   type='number'
                   name='id'
-                  required='true'
+                  required={true}
                   min='10000000000'
                   max='99999999999'
                 />
               </div>
               <div>
-                <label for='county'>
+                <label htmlFor='county'>
                   Current County {rowSelection[0].County}:{' '}
                 </label>
                 <select
@@ -548,7 +539,7 @@ export default function Admin (props) {
                 </select>
               </div>
               <div>
-                <label for='insured'>
+                <label htmlFor='insured'>
                   Current Insured {rowSelection[0].Insured}:{' '}
                 </label>
                 <select
@@ -564,7 +555,7 @@ export default function Admin (props) {
                 </select>
               </div>
               <div>
-                <label for='age'>Current Age {rowSelection[0].Age}: </label>
+                <label htmlFor='age'>Current Age {rowSelection[0].Age}: </label>
                 <select name='age' onChange={evt => setAge(evt.target.value)}>
                   <option value={`${rowSelection[0].Age}`}>No Change</option>
                   <option value='Did Not Answer'>Did Not Answer</option>
@@ -579,9 +570,8 @@ export default function Admin (props) {
                 type='text'
                 name='impactLife'
                 onChange={evt => setMedicalDebt(evt.target.value)}
-              >
-                {medicalDebt}
-              </textarea>
+                value={medicalDebt}
+              />
               <h5>
                 How Has Medical Debt Impacted Your Access To Care? (current
                 answer)
@@ -590,9 +580,8 @@ export default function Admin (props) {
                 type='text'
                 name='impactCare'
                 onChange={evt => setAccessCare(evt.target.value)}
-              >
-                {accessCare}
-              </textarea>
+                value={accessCare}
+              />
               <h5>
                 What Do You Think Of The Cost Of Medical Care? (current answer)
               </h5>
@@ -600,9 +589,8 @@ export default function Admin (props) {
                 type='text'
                 name='costCare'
                 onChange={evt => setCostCare(evt.target.value)}
-              >
-                {costCare}
-              </textarea>
+                value={costCare}
+              />
               <h5>
                 Have You Been Surprised By A Medical Bill? (current answer)
               </h5>
@@ -610,9 +598,8 @@ export default function Admin (props) {
                 type='text'
                 name='surpriseBill'
                 onChange={evt => setSurprised(evt.target.value)}
-              >
-                {surprised}
-              </textarea>
+                value={surprised}
+              />
               <h5>
                 What Is Your Experience With Medical Debt Collectors? (current
                 answer)
@@ -621,9 +608,8 @@ export default function Admin (props) {
                 type='text'
                 name='collections'
                 onChange={evt => setCollectors(evt.target.value)}
-              >
-                {collectors}
-              </textarea>
+                value={collectors}
+              />
               <div>
                 <input type='submit' />
               </div>
