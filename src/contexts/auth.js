@@ -14,7 +14,8 @@ function useAuth() {
       });
     },
     logout() {
-      return new Promise((res) => {
+      return new Promise(async (res) => {
+        await fetch('/api/logout');
         setUser(null);
         res();
       });

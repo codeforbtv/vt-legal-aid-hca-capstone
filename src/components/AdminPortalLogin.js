@@ -1,11 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../contexts/auth";
+import { Typography } from '@material-ui/core';
+
 
 export default function AdminPortalLogin ({ setToken }) {
   let navigate = useNavigate();
   let location = useLocation();
   const auth = useAuth();
+  const [error, setError] = useState(null);
+
 
   const from = location.state?.from?.pathname || "/admin-portal";
 
@@ -35,6 +39,7 @@ export default function AdminPortalLogin ({ setToken }) {
 
   async function handleLogin(ev) {
     ev.preventDefault();
+    setError(null);
 
     const formData = new FormData(ev.target);
     try {
@@ -46,10 +51,14 @@ export default function AdminPortalLogin ({ setToken }) {
         body: new URLSearchParams(formData).toString(),
       });
 
-      const user = await response.json();
-
-      await auth.login(user);
-      navigate(from, { replace: true });
+      if (response.status === 200) {
+        const user = await response.json();
+        await auth.login(user);
+        navigate(from, { replace: true });
+      }
+      else {
+        setError(`Email or password is incorrect`)
+      }
     }
     catch (ex) {
       console.log(ex);
@@ -60,6 +69,9 @@ export default function AdminPortalLogin ({ setToken }) {
     <>
       <h1>Log in Here!</h1>
       {/* if (messages.error){messages.error} */}
+      { error &&
+        <Typography color="error">{ error }</Typography>
+      }
       <form onSubmit={handleLogin} method="post" action="/api/login">
         <div>
           <label htmlFor='email'>Email:</label>

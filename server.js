@@ -275,6 +275,13 @@ app.get(
   }
 );
 
+//to log out (an express method)
+app.get('/api/logout', (req, res) => {
+  req.logOut();
+  res.json({});
+});
+
+
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
     console.log(req.body)
@@ -290,12 +297,6 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
   } catch {
     res.redirect('/register')
   }
-})
-
-//to log out (an express method)
-app.delete('/logout', (req, res) => {
-  req.logOut()
-  res.redirect('/login')
 })
 
 //protecting our routes with middleware function that checks if authenticated

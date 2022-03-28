@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import LegalAidLogo1 from '../LegalAidLogo1.jpg'
+import LoginStatus from './LoginStatus';
 
 export default function NavAdmin (props) {
   return (
@@ -30,6 +31,7 @@ export default function NavAdmin (props) {
             <Button color="inherit" component={Link} to="/admin-portal">
               Admin Home
             </Button>
+            <LoginStatus color='inherit' />
           </div>
         </Toolbar>
       </AppBar>
