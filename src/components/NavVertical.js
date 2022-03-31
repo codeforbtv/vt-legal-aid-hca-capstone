@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import Stack from '@mui/material/Stack'
 import ListItem from '@mui/material/ListItem'
@@ -14,27 +14,6 @@ import Select from '@mui/material/Select'
 import { Link } from 'react-router-dom'
 
 export default function NavVertical (props) {
-  const [state, setState] = useState({
-    mobileView: false
-  })
-
-  // const { mobileView } = state;
-
-  useEffect(() => {
-    const setResponsiveness = () => {
-      return window.innerWidth < 900
-        ? setState(prevState => ({ ...prevState, mobileView: true }))
-        : setState(prevState => ({ ...prevState, mobileView: false }))
-    }
-
-    setResponsiveness()
-    window.addEventListener('resize', () => setResponsiveness())
-
-    return () => {
-      window.removeEventListener('resize', () => setResponsiveness())
-    }
-  }, [])
-
   //evt handler for when a new filter is selected from the form in this component
   const handleChange = event => {
     if (event.target.value !== 'Clear') {
@@ -47,10 +26,6 @@ export default function NavVertical (props) {
     } else {
       window.location.reload(false)
     }
-  }
-
-  function refreshPage () {
-    window.location.reload(false)
   }
 
   return (
@@ -78,9 +53,9 @@ export default function NavVertical (props) {
             </ListItem>
             <Stack spacing={1} direction='row'>
               <Stack spacing={0}>
-                <ListItem className='V-Buttons'>
+                <ListItem className="V-Buttons">
                   {' '}
-                  <Button color='inherit' onClick={refreshPage}>
+                  <Button color="inherit" component={Link} to="/">
                     Home
                   </Button>
                 </ListItem>

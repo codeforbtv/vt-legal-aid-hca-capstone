@@ -112,6 +112,7 @@ export default function Home () {
                 {' '}
                 <a
                   href='https://docs.google.com/forms/d/e/1FAIpQLScRvw8T2MMNnG9up4qYqJ-oKS2WkUUPnOmkIip8QQP-RVxBeQ/viewform'
+                  rel="noreferrer"
                   target='_blank'
                 >
                   Submit your own story.

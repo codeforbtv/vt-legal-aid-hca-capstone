@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -7,12 +7,9 @@ import Button from '@material-ui/core/Button'
 import LegalAidLogo1 from '../LegalAidLogo1.jpg'
 
 export default function NavAbout (props) {
-  function refreshPage () {
-    window.location.reload(false)
-  }
 
   return (
-    <div class='nav-wrapper'>
+    <div className='nav-wrapper'>
       <AppBar
         style={{ backgroundColor: '#205A3E' }}
         position='static'
@@ -32,7 +29,7 @@ export default function NavAbout (props) {
             <Button color='inherit' component={Link} to='/'>
               Home
             </Button>
-            <Button color='inherit' onClick={refreshPage}>
+            <Button color='inherit' component={Link} to="/about">
               About
             </Button>
             <Button

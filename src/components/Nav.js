@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -11,18 +10,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 
-const useStyles = makeStyles(theme => ({
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
-  title: {
-    flexGrow: 1
-  }
-}))
-
 export default function Nav (props) {
-  const classes = useStyles()
-
   //evt handler for when a new filter is selected from the form in this component
   const handleChange = event => {
     if (event.target.value !== 'Clear') {
@@ -37,12 +25,8 @@ export default function Nav (props) {
     }
   }
 
-  function refreshPage () {
-    window.location.reload(false)
-  }
-
   return (
-    <div class='nav-wrapper'>
+    <div className="nav-wrapper">
       <AppBar
         style={{ backgroundColor: '#205A3E' }}
         position='static'
@@ -57,8 +41,8 @@ export default function Nav (props) {
             <Typography variant='h4'>Medical Debt in Vermont</Typography>
             <Typography variant='h6'>Real People - Real Stories</Typography>
           </div>
-          <div id='nav-buttons'>
-            <Button color='inherit' onClick={refreshPage}>
+          <div id="nav-buttons">
+            <Button color="inherit" component={Link} to="/">
               Home
             </Button>
 

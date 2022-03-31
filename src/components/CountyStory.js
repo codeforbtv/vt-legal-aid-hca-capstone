@@ -104,7 +104,7 @@ export default function Story(props) {
         </MaroonTextTypography>
         <GreenTextTypography variant="h6">
           {/* County, insured, age all are conditionally rendered using dataFetched and utilize the shuffledIndex state variable to display that index in the data array */}
-          <div class="drop-wrapper">
+          <div className="drop-wrapper">
             <b>
               {correctedCountyFetch} County Story #{props.shuffledIndex + 1} of{" "}
               {countyStories.length}
@@ -112,7 +112,7 @@ export default function Story(props) {
           </div>
         </GreenTextTypography>
 
-        <div class="age-insurance">
+        <div className="age-insurance">
           <div>
             <b>Insured:</b>{" "}
             {dataFetched ? countyStories[props.shuffledIndex].Insured : null}

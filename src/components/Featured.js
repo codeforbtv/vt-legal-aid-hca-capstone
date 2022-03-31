@@ -48,18 +48,18 @@ export default function Featured (props) {
   }
   return (
     <>
-      <div class='featured-story'>
+      <div className='featured-story'>
         <MaroonTextTypography variant='h6'>
           <b>Featured Story: </b>
         </MaroonTextTypography>
         {/* County, Insured, and Age are all displayed conditionally with a ternary */}
-        <GreenTextTypography variant='h7'>
+        <GreenTextTypography variant='h6'>
           <b>
             County:{' '}
             {allStories.length ? allStories[randomStories[0]].County : null}
           </b>
         </GreenTextTypography>
-        <div class='age-insurance'>
+        <div className='age-insurance'>
           <div>
             <b>Insured:</b>{' '}
             {allStories.length ? allStories[randomStories[0]].Insured : null}
@@ -75,7 +75,7 @@ export default function Featured (props) {
             ? [
                 allStories[randomStories[0]]
                   .HaveYouBeenSurprisedByAMedicalBill ? (
-                  <li className='story-bullets'>
+                  <li className='story-bullets' key="HaveYouBeenSurprisedByAMedicalBill">
                     {
                       allStories[randomStories[0]]
                         .HaveYouBeenSurprisedByAMedicalBill
@@ -88,7 +88,7 @@ export default function Featured (props) {
             ? [
                 allStories[randomStories[0]]
                   .HowHasMedicalDebtImpactedYourAccessToCare ? (
-                  <li className='story-bullets'>
+                  <li className='story-bullets' key="HowHasMedicalDebtImpactedYourAccessToCare">
                     {
                       allStories[randomStories[0]]
                         .HowHasMedicalDebtImpactedYourAccessToCare
@@ -101,7 +101,7 @@ export default function Featured (props) {
             ? [
                 allStories[randomStories[0]]
                   .HowHasMedicalDebtImpactedYourLife ? (
-                  <li className='story-bullets'>
+                  <li className='story-bullets' key="HowHasMedicalDebtImpactedYourLife">
                     {
                       allStories[randomStories[0]]
                         .HowHasMedicalDebtImpactedYourLife
@@ -115,7 +115,7 @@ export default function Featured (props) {
             ? [
                 allStories[randomStories[0]]
                   .WhatDoYouThinkOfTheCostOfMedicalCare ? (
-                  <li className='story-bullets'>
+                  <li className='story-bullets' key="WhatDoYouThinkOfTheCostOfMedicalCare">
                     {
                       allStories[randomStories[0]]
                         .WhatDoYouThinkOfTheCostOfMedicalCare
@@ -129,7 +129,7 @@ export default function Featured (props) {
             ? [
                 allStories[randomStories[0]]
                   .WhatIsYourExperienceWithMedicalDebtCollectors ? (
-                  <li className='story-bullets'>
+                  <li className='story-bullets' key="WhatIsYourExperienceWithMedicalDebtCollectors">
                     {
                       allStories[randomStories[0]]
                         .WhatIsYourExperienceWithMedicalDebtCollectors
