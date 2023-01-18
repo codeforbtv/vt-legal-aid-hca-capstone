@@ -59,19 +59,22 @@ const UserSchema = new mongoose.Schema({
   Password: String
 })
 //creating the initial connection to the database using url for mongoAtlas and .env secured password
-// mongoose.connect("mongodb://localhost:27017/VT-Legal", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
 
-mongoose.connect(
-  `mongodb+srv://VTLegalAdmin:${process.env.PASSWORDMONGO}@medicaldebt.lmsqy.mongodb.net/VT-Legal?retryWrites=true&w=majority`,
-  {
+if(dev || !process.env.PASSWORDMONGO){
+
+  mongoose.connect("mongodb://localhost:27017/VT-Legal", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
-)
-
+    useUnifiedTopology: true,
+  });
+}
+else{
+  mongoose.connect(
+    `mongodb+srv://VTLegalAdmin:${process.env.PASSWORDMONGO}@medicaldebt.lmsqy.mongodb.net/VT-Legal?retryWrites=true&w=majority`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+}
 //initializing database using connection and storing in variable database
 const database = mongoose.connection
 
